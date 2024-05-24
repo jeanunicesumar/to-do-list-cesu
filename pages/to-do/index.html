@@ -2,39 +2,63 @@
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>To Do List</title>
-
-    <link rel="stylesheet" href="../../styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <header id="header">
-      <a href="../../index.html">
-        <h1>To Do List</h1>
-      </a>
-    </header>
-
-    <main>
-
-        <form onsubmit="enviarForm(event)">
-          <input type="text" name="title" id="title" placeholder="Informe o título da tarefa" required />
-          <textarea name="description" id="description" placeholder="Informe a descrição da tarefa"></textarea>
-          
+    <div class="container">
+      <header>
+        <h1>Todo List</h1>
+      </header>
+      <main>
+        <!-- Formulário para adicionar tarefas -->
+        <form id="taskForm" onsubmit="addTask(event)">
+          <input
+            type="text"
+            name="title"
+            id="title"
+            required
+            placeholder="Informe o título da tarefa"
+          />
+          <textarea
+            id="description"
+            name="description"
+            required
+            placeholder="Informe a descrição da tarefa"
+          ></textarea>
           <button type="submit">Salvar Tarefa</button>
         </form>
-      <div id="list-task">
 
-      </div>
+        <!-- Lista de tarefas -->
+        <ul id="taskList"></ul>
+      </main>
+      <footer>&copy; 2024 Todo List</footer>
+    </div>
 
-    </main>
+    <dialog class="dialog">
+      <form id="taskFormEdit" onsubmit="editTask(event)" onreset="resetDialog(event)">
+        <input
+          type="text"
+          name="title"
+          id="title-edit"
+          required
+          placeholder="Informe o título da tarefa"
+        />
+        <textarea
+          id="description-edit"
+          name="description"
+          required
+          placeholder="Informe a descrição da tarefa"
+        ></textarea>
+        <span>
+          <button type="submit">Salvar Tarefa</button>
+          <button type="reset" class="cancel-edit">Cancelar</button>
+        </span>
+      </form>
+    </dialog>
 
-    <footer aria-label="Rodapé">
-      <p aria-label="Copyright">
-        &copy; 2024 Todo List
-      </p>
-    </footer>
     <script src="./index.js"></script>
-    <script src="../../index.js"></script>
+    <script src="../../footer-counter.js"></script>
   </body>
 </html>
