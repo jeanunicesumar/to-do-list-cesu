@@ -12,7 +12,7 @@ function addTask(event) {
   const taskDescription = formData.get('description')
 
   const tasks = JSON.parse(localStorage.getItem(taskKey)) || []
-  tasks.push({ id: taskId, title: taskTitle, description: taskDescription })
+  tasks.push({ id: `${taskId}`, title: taskTitle, description: taskDescription })
   localStorage.setItem(taskKey, JSON.stringify(tasks))
 
   appendTasksLi();
@@ -30,6 +30,7 @@ function appendTasksLi() {
     .map((task) => `<li id="${task.id}">
                       <h2>${task.title}</h2><p>${task.description}</p>
                       <button class="button-edit" title="Editar tarefa">✏️</button>
+                      <button class="button-delete" onClick="deleteTask(event)" title="Excluir tarefa">❌</button>
                     </li>`)
     .join('');
 
@@ -98,4 +99,23 @@ function editTask(event) {
 
   dialog.removeAttribute('id');
   dialog.close();
+}
+
+function deleteTask(event) {
+  const id = event.target.parentElement.id;
+
+  removeTask(id);
+  
+  const li = event.target.parentElement;
+  const ul = document.querySelector('#taskList');
+  ul.removeChild(li);
+
+}
+
+function removeTask(id) {
+  const tasks = JSON.parse(localStorage.getItem(taskKey)) || []
+
+  const index = tasks.findIndex(teste => teste.id === id);
+  tasks.splice(index, 1);
+  localStorage.setItem(taskKey, JSON.stringify(tasks));
 }
